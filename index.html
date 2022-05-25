@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>万能搜索引擎</title>
+    <link rel="icon" href="./favicon.ico" />
+  </head>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-image: url("./bg.jpg");
+      color: white;
+      font-size: large;
+    }
+  </style>
+  <body>
+    <h1>万能搜索引擎</h1>
+    <div>
+      <div>
+        <input
+          type="text"
+          placeholder="搜索内容"
+          id="typeBox"
+          style="width: 466px"
+        />
+        <span onclick="go()" style="margin-left: 10px">前往</span>
+      </div>
+      <div style="margin-top: 10px">
+        <label for="search">
+          <input type="radio" id="baidu" name="search" value="baidu" checked />
+          百度
+          <br />
+          <input type="radio" id="google" name="search" value="google" />
+          谷歌
+          <br />
+          <input type="radio" id="bing" name="search" value="bing" />
+          必应
+          <br />
+          <input type="radio" id="360" name="search" value="360" />
+          360
+          <br />
+          <input type="radio" id="soGou" name="search" value="soGou" />
+          搜狗
+          <br />
+          <input type="radio" id="biliBili" name="search" value="biliBili" />
+          哔哩哔哩
+          <br />
+          <input
+            type="radio"
+            id="baiDuHanYu"
+            name="search"
+            value="baiDuHanYu"
+          />
+          百度汉语
+          <br />
+          <input type="radio" id="youDao" name="search" value="youDao" />
+          有道（目前仅支持英文转中文）
+          <br />
+          <input
+            type="radio"
+            id="baiDuFanYi"
+            name="search"
+            value="baiDuFanYi"
+          />
+          百度翻译（目前仅支持英文转中文）
+          <br />
+          <input type="radio" id="others" name="search" value="others" />
+          其他（请填写URL及表单关键字）：
+          <input
+            type="text"
+            placeholder="https://www.baidu.com/s?wd="
+            id="othersValue"
+            style="width: 200px"
+          />
+        </label>
+      </div>
+    </div>
+  </body>
+  <script>
+    function getValue() {
+      let radio = document.getElementsByName("search");
+      for (i = 0; i < radio.length; i++) {
+        if (radio[i].checked) {
+          return radio[i].value;
+        }
+      }
+    }
+    function go() {
+      let typeBox = document.getElementById("typeBox").value;
+      let choose = getValue();
+      let a;
+      switch (choose) {
+        case "baidu":
+          a = "https://www.baidu.com/s?wd=" + typeBox;
+          break;
+        case "google":
+          a = "https://www.soumao.cc/search?q=" + typeBox;
+          break;
+        case "bing":
+          a = "https://cn.bing.com/search?q=" + typeBox;
+          break;
+        case "360":
+          a = "https://www.so.com/s?q=" + typeBox;
+          break;
+        case "youDao":
+          a = "http://www.youdao.com/w/eng/" + typeBox;
+          break;
+        case "baiDuFanYi":
+          a = "https://fanyi.baidu.com/?aldtype=16047#el/zh/" + typeBox;
+          break;
+        case "soGou":
+          a = "http://www.sogou.com/web?query=" + typeBox;
+          break;
+        case "biliBili":
+          a = "https://search.bilibili.com/all?keyword=" + typeBox;
+          break;
+        case "baiDuHanYu":
+          a = "https://hanyu.baidu.com/s?wd=" + typeBox;
+          break;
+        default:
+          a = document.getElementById("othersValue").value + typeBox;
+          break;
+      }
+      window.location.replace(a);
+    }
+  </script>
+</html>
