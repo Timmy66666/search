@@ -31,53 +31,62 @@
         <span onclick="go()" style="margin-left: 10px">前往</span>
       </div>
       <div style="margin-top: 10px">
-        <label for="search">
-          <input type="radio" id="baidu" name="search" value="baidu" checked />
-          百度
-          <br />
-          <input type="radio" id="google" name="search" value="google" />
-          谷歌
-          <br />
-          <input type="radio" id="bing" name="search" value="bing" />
-          必应
-          <br />
-          <input type="radio" id="360" name="search" value="360" />
-          360
-          <br />
-          <input type="radio" id="soGou" name="search" value="soGou" />
-          搜狗
-          <br />
-          <input type="radio" id="biliBili" name="search" value="biliBili" />
-          哔哩哔哩
-          <br />
-          <input
-            type="radio"
-            id="baiDuHanYu"
-            name="search"
-            value="baiDuHanYu"
-          />
-          百度汉语
-          <br />
-          <input type="radio" id="youDao" name="search" value="youDao" />
-          有道（目前仅支持英文转中文）
-          <br />
-          <input
-            type="radio"
-            id="baiDuFanYi"
-            name="search"
-            value="baiDuFanYi"
-          />
-          百度翻译（目前仅支持英文转中文）
-          <br />
-          <input type="radio" id="others" name="search" value="others" />
-          其他（请填写URL及表单关键字）：
-          <input
-            type="text"
-            placeholder="https://www.baidu.com/s?wd="
-            id="othersValue"
-            style="width: 200px"
-          />
-        </label>
+        <form id="form">
+          <label for="search">
+            <input
+              type="radio"
+              id="baidu"
+              name="search"
+              value="baidu"
+              checked
+            />
+            百度
+            <br />
+            <input type="radio" id="google" name="search" value="google" />
+            谷歌
+            <br />
+            <input type="radio" id="bing" name="search" value="bing" />
+            必应
+            <br />
+            <input type="radio" id="360" name="search" value="360" />
+            360
+            <br />
+            <input type="radio" id="soGou" name="search" value="soGou" />
+            搜狗
+            <br />
+            <input type="radio" id="biliBili" name="search" value="biliBili" />
+            哔哩哔哩
+            <br />
+            <input
+              type="radio"
+              id="baiDuHanYu"
+              name="search"
+              value="baiDuHanYu"
+            />
+            百度汉语
+            <br />
+            <input type="radio" id="youDao" name="search" value="youDao" />
+            有道（目前仅支持英文转中文）
+            <br />
+            <input
+              type="radio"
+              id="baiDuFanYi"
+              name="search"
+              value="baiDuFanYi"
+            />
+            百度翻译（目前仅支持英文转中文）
+            <br />
+            <input type="radio" id="others" name="search" value="others" />
+            其他（请填写URL及表单关键字）：
+            <input
+              type="text"
+              placeholder="https://www.baidu.com/s?wd="
+              id="othersValue"
+              style="width: 200px"
+              onclick="turn()"
+            />
+          </label>
+        </form>
       </div>
     </div>
   </body>
@@ -127,6 +136,15 @@
           break;
       }
       window.location.replace(a);
+    }
+    window.onkeydown = function (event) {
+      if (event.keyCode === 13) {
+        go();
+      }
+    };
+    function turn() {
+      radio = document.getElementById("form");
+      radio[9].checked = true;
     }
   </script>
 </html>
