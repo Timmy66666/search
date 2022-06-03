@@ -24,9 +24,11 @@
       <div>
         <input
           type="text"
-          placeholder="搜索内容"
+          placeholder="你好！"
           id="typeBox"
           style="width: 466px"
+          onclick="turnFanyi()"
+          value="你好！"
         />
         <span onclick="go()" style="margin-left: 10px">前往</span>
       </div>
@@ -83,7 +85,7 @@
               placeholder="https://www.baidu.com/s?wd="
               id="othersValue"
               style="width: 200px"
-              onclick="turn()"
+              onclick="turnOther()"
             />
           </label>
         </form>
@@ -99,50 +101,65 @@
         }
       }
     }
+    function isEnglish(typeBox) {
+      for (let i = 0; i < typeBox.length; i++) {
+        if (!(typeBox[i] >= "a" && typeBox[i] <= "z")) {
+          return false;
+        }
+      }
+      return true;
+    }
+    function turnFanyi() {
+      let typeBox = document.getElementById("typeBox").value;
+      if (isEnglish(typeBox)) {
+        radio = document.getElementById("form");
+        radio[7].checked = true;
+      }
+    }
     function go() {
       let typeBox = document.getElementById("typeBox").value;
       let choose = getValue();
-      let a;
+      let url;
       switch (choose) {
         case "baidu":
-          a = "https://www.baidu.com/s?wd=" + typeBox;
+          url = "https://www.baidu.com/s?wd=" + typeBox;
           break;
         case "google":
-          a = "https://www.soumao.cc/search?q=" + typeBox;
+          url = "https://www.soumao.cc/search?q=" + typeBox;
           break;
         case "bing":
-          a = "https://cn.bing.com/search?q=" + typeBox;
+          url = "https://cn.bing.com/search?q=" + typeBox;
           break;
         case "360":
-          a = "https://www.so.com/s?q=" + typeBox;
+          url = "https://www.so.com/s?q=" + typeBox;
           break;
         case "youDao":
-          a = "http://www.youdao.com/w/eng/" + typeBox;
+          url = "http://www.youdao.com/w/eng/" + typeBox;
           break;
         case "baiDuFanYi":
-          a = "https://fanyi.baidu.com/#en/zh/" + typeBox;
+          url = "https://fanyi.baidu.com/#en/zh/" + typeBox;
           break;
         case "soGou":
-          a = "http://www.sogou.com/web?query=" + typeBox;
+          url = "http://www.sogou.com/web?query=" + typeBox;
           break;
         case "biliBili":
-          a = "https://search.bilibili.com/all?keyword=" + typeBox;
+          url = "https://search.bilibili.com/all?keyword=" + typeBox;
           break;
         case "baiDuHanYu":
-          a = "https://hanyu.baidu.com/s?wd=" + typeBox;
+          url = "https://hanyu.baidu.com/s?wd=" + typeBox;
           break;
         default:
-          a = document.getElementById("othersValue").value + typeBox;
+          url = document.getElementById("othersValue").value + typeBox;
           break;
       }
-      window.location.replace(a);
+      window.location.replace(url);
     }
     window.onkeydown = function (event) {
       if (event.keyCode === 13) {
         go();
       }
     };
-    function turn() {
+    function turnOther() {
       radio = document.getElementById("form");
       radio[9].checked = true;
     }
