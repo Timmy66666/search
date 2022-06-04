@@ -96,9 +96,11 @@
       setTimeout(() => {
         let after = document.getElementById("typeBox").value;
         if (before != after) {
+          radio = document.getElementById("form");
           if (isEnglish(after)) {
-            radio = document.getElementById("form");
             radio[7].checked = true;
+          } else {
+            radio[0].checked = true;
           }
         }
         cache();
