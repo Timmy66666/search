@@ -24,11 +24,9 @@
       <div>
         <input
           type="text"
-          placeholder="你好！"
+          placeholder="Hello!"
           id="typeBox"
           style="width: 466px"
-          onclick="turnFanyi()"
-          value="你好！"
         />
         <span onclick="go()" style="margin-left: 10px">前往</span>
       </div>
@@ -93,6 +91,19 @@
     </div>
   </body>
   <script>
+    function cache() {
+      let before = document.getElementById("typeBox").value;
+      setTimeout(() => {
+        let after = document.getElementById("typeBox").value;
+        if (before != after) {
+          if (isEnglish(after)) {
+            radio = document.getElementById("form");
+            radio[7].checked = true;
+          }
+        }
+        cache();
+      }, 1000);
+    }
     function getValue() {
       let radio = document.getElementsByName("search");
       for (i = 0; i < radio.length; i++) {
@@ -108,13 +119,6 @@
         }
       }
       return true;
-    }
-    function turnFanyi() {
-      let typeBox = document.getElementById("typeBox").value;
-      if (isEnglish(typeBox)) {
-        radio = document.getElementById("form");
-        radio[7].checked = true;
-      }
     }
     function go() {
       let typeBox = document.getElementById("typeBox").value;
@@ -163,5 +167,6 @@
       radio = document.getElementById("form");
       radio[9].checked = true;
     }
+    cache();
   </script>
 </html>
