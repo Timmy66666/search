@@ -19,7 +19,7 @@
     }
   </style>
   <body>
-    <div style="display: flex; color: gray">
+    <div style="display: flex; color: gray; font-size: larger">
       <p1 id="day">2000-01-01</p1>
       <p1 id="time" style="margin-left: 16px">00:00:00</p1>
     </div>
@@ -105,6 +105,7 @@
       <p1 id="open">今日开机时间：00:00:00</p1>
       <p1 id="toNow" style="margin-left: 16px">已开机：00:00:00</p1>
     </div>
+    <audio id="audio" src="./music.m4a" hidden="true"></audio>
   </body>
   <script>
     function cache() {
@@ -176,18 +177,16 @@
       }
       window.open(url);
     }
+    function turnOther() {
+      radio = document.getElementById("form");
+      radio[9].checked = true;
+    }
     window.onkeydown = function (event) {
       if (event.keyCode === 13) {
         go();
       }
     };
-    function turnOther() {
-      radio = document.getElementById("form");
-      radio[9].checked = true;
-    }
     cache();
-    time();
-    getDifference();
     function getDayTime() {
       let date = new Date();
       let year = date.getFullYear();
@@ -212,6 +211,19 @@
     function time() {
       document.getElementById("day").innerHTML = getDayTime();
       document.getElementById("time").innerHTML = getSecondTime();
+      let now = new Date();
+      let open =
+        window.localStorage.getItem("day") +
+        " " +
+        window.localStorage.getItem("time");
+      open = new Date(open.replace(/-/g, "/"));
+      document.getElementById("toNow").innerHTML =
+        "已开机：" + getDifference(now, open);
+      let clock = new Date((getDayTime() + " " + clockTime).replace(/-/g, "/"));
+      if (getDifference(now, clock) == "00:" + addZero(clockSpan) + ":00") {
+        clockTime = getSecondTime();
+        document.getElementById("audio").play();
+      }
       setTimeout(() => {
         time();
       }, 1000);
@@ -219,29 +231,23 @@
     function addZero(time) {
       return time < 10 ? "0" + time : time;
     }
+    function getDifference(timea, timeb) {
+      let times = timea.getTime() - timeb.getTime();
+      let h = parseInt(times / (3600 * 1000));
+      let m = parseInt((times % (3600 * 1000)) / (60 * 1000));
+      let s = parseInt(((times % (3600 * 1000)) % (60 * 1000)) / 1000);
+      return addZero(h) + ":" + addZero(m) + ":" + addZero(s);
+    }
     if (window.localStorage.getItem("day") != getDayTime()) {
       console.log("new");
       window.localStorage.setItem("day", getDayTime());
       window.localStorage.setItem("time", getSecondTime());
+      clockTime = getSecondTime();
     }
+    let clockTime,
+      clockSpan = 30;
+    time();
     document.getElementById("open").innerHTML =
       "今日开机时间：" + window.localStorage.getItem("time");
-    function getDifference() {
-      let date = new Date();
-      let open =
-        window.localStorage.getItem("day") +
-        " " +
-        window.localStorage.getItem("time");
-      let opentime = new Date(open.replace(/-/g, "/"));
-      let times = date.getTime() - opentime.getTime();
-      let h = parseInt(times / (3600 * 1000));
-      let m = parseInt((times % (3600 * 1000)) / (60 * 1000));
-      let s = parseInt(((times % (3600 * 1000)) % (60 * 1000)) / 1000);
-      document.getElementById("toNow").innerHTML =
-        "已开机：" + addZero(h) + ":" + addZero(m) + ":" + addZero(s);
-      setTimeout(() => {
-        getDifference();
-      }, 1000);
-    }
   </script>
 </html>
