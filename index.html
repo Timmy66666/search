@@ -19,7 +19,11 @@
     }
   </style>
   <body>
-    <h1>万能搜索引擎</h1>
+    <div style="display: flex; color: gray">
+      <p1 id="day">2000-01-01</p1>
+      <p1 id="time" style="margin-left: 16px">00:00:00</p1>
+    </div>
+    <h1 style="margin-top: 30px">万能搜索引擎</h1>
     <div>
       <div>
         <input
@@ -88,6 +92,18 @@
           </label>
         </form>
       </div>
+    </div>
+    <div
+      style="
+        display: flex;
+        color: gray;
+        margin-top: 30px;
+        justify-content: space-between;
+        width: 525.89px;
+      "
+    >
+      <p1 id="open">今日开机时间：00:00:00</p1>
+      <p1 id="toNow" style="margin-left: 16px">已开机：00:00:00</p1>
     </div>
   </body>
   <script>
@@ -170,5 +186,62 @@
       radio[9].checked = true;
     }
     cache();
+    time();
+    getDifference();
+    function getDayTime() {
+      let date = new Date();
+      let year = date.getFullYear();
+      let month = date.getMonth() + 1;
+      let day = date.getDate();
+      let dayTime = year + "-" + this.addZero(month) + "-" + this.addZero(day);
+      return dayTime;
+    }
+    function getSecondTime() {
+      let date = new Date();
+      let hour = date.getHours();
+      let minute = date.getMinutes();
+      let second = date.getSeconds();
+      let secondTime =
+        this.addZero(hour) +
+        ":" +
+        this.addZero(minute) +
+        ":" +
+        this.addZero(second);
+      return secondTime;
+    }
+    function time() {
+      document.getElementById("day").innerHTML = getDayTime();
+      document.getElementById("time").innerHTML = getSecondTime();
+      setTimeout(() => {
+        time();
+      }, 1000);
+    }
+    function addZero(time) {
+      return time < 10 ? "0" + time : time;
+    }
+    if (window.localStorage.getItem("day") != getDayTime()) {
+      console.log("new");
+      window.localStorage.setItem("day", getDayTime());
+      window.localStorage.setItem("time", getSecondTime());
+    }
+    document.getElementById("open").innerHTML =
+      "今日开机时间：" + window.localStorage.getItem("time");
+    function getDifference() {
+      let date = new Date();
+      let open =
+        window.localStorage.getItem("day") +
+        " " +
+        window.localStorage.getItem("time");
+      let opentime = new Date(open.replace(/-/g, "/"));
+      let times = date.getTime() - opentime.getTime();
+      let h = parseInt(times / (3600 * 1000));
+      let m = parseInt((times % (3600 * 1000)) / (60 * 1000));
+      let s = parseInt(((times % (3600 * 1000)) % (60 * 1000)) / 1000);
+      document.getElementById("toNow").innerHTML =
+        "已开机：" + addZero(h) + ":" + addZero(m) + ":" + addZero(s);
+      setTimeout(() => {
+        getDifference();
+      }, 1000);
+    }
   </script>
 </html>
