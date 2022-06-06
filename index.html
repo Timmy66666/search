@@ -17,95 +17,119 @@
       color: white;
       font-size: large;
     }
+    .list {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+    #body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
   </style>
   <body>
-    <div style="display: flex; color: gray; font-size: larger">
-      <p1 id="day">2000-01-01</p1>
-      <p1 id="time" style="margin-left: 16px">00:00:00</p1>
-    </div>
-    <h1 style="margin-top: 30px">万能搜索引擎</h1>
-    <div>
+    <div id="body">
+      <div style="display: flex; color: gray; font-size: larger">
+        <p1 id="day">2000-01-01</p1>
+        <p1 id="time" style="margin-left: 16px">00:00:00</p1>
+      </div>
+      <h1 style="margin-top: 50px">万能搜索引擎</h1>
       <div>
-        <input
-          type="text"
-          placeholder="Hello!"
-          id="typeBox"
-          style="width: 466px"
-        />
-        <span onclick="go()" style="margin-left: 10px">前往</span>
+        <div>
+          <input
+            type="text"
+            placeholder="搜索内容……"
+            id="typeBox"
+            style="width: 466px"
+          />
+          <span onclick="go()" style="margin-left: 10px">搜索</span>
+        </div>
+        <div style="margin-top: 10px">
+          <form id="form">
+            <label for="search">
+              <input
+                type="radio"
+                id="baidu"
+                name="search"
+                value="baidu"
+                checked
+              />
+              百度
+              <br />
+              <input type="radio" id="google" name="search" value="google" />
+              谷歌
+              <br />
+              <input type="radio" id="bing" name="search" value="bing" />
+              必应
+              <br />
+              <input type="radio" id="360" name="search" value="360" />
+              360
+              <br />
+              <input type="radio" id="soGou" name="search" value="soGou" />
+              搜狗
+              <br />
+              <input
+                type="radio"
+                id="biliBili"
+                name="search"
+                value="biliBili"
+              />
+              哔哩哔哩
+              <br />
+              <input
+                type="radio"
+                id="baiDuHanYu"
+                name="search"
+                value="baiDuHanYu"
+              />
+              百度汉语
+              <br />
+              <input type="radio" id="youDao" name="search" value="youDao" />
+              有道
+              <br />
+              <input
+                type="radio"
+                id="baiDuFanYi"
+                name="search"
+                value="baiDuFanYi"
+              />
+              百度翻译
+              <br />
+              <input type="radio" id="others" name="search" value="others" />
+              其他（请填写URL及表单关键字）：
+              <input
+                type="text"
+                placeholder="https://www.baidu.com/s?wd="
+                id="othersValue"
+                style="width: 200px"
+                onclick="turnOther()"
+              />
+            </label>
+          </form>
+        </div>
       </div>
-      <div style="margin-top: 10px">
-        <form id="form">
-          <label for="search">
-            <input
-              type="radio"
-              id="baidu"
-              name="search"
-              value="baidu"
-              checked
-            />
-            百度
-            <br />
-            <input type="radio" id="google" name="search" value="google" />
-            谷歌
-            <br />
-            <input type="radio" id="bing" name="search" value="bing" />
-            必应
-            <br />
-            <input type="radio" id="360" name="search" value="360" />
-            360
-            <br />
-            <input type="radio" id="soGou" name="search" value="soGou" />
-            搜狗
-            <br />
-            <input type="radio" id="biliBili" name="search" value="biliBili" />
-            哔哩哔哩
-            <br />
-            <input
-              type="radio"
-              id="baiDuHanYu"
-              name="search"
-              value="baiDuHanYu"
-            />
-            百度汉语
-            <br />
-            <input type="radio" id="youDao" name="search" value="youDao" />
-            有道
-            <br />
-            <input
-              type="radio"
-              id="baiDuFanYi"
-              name="search"
-              value="baiDuFanYi"
-            />
-            百度翻译
-            <br />
-            <input type="radio" id="others" name="search" value="others" />
-            其他（请填写URL及表单关键字）：
-            <input
-              type="text"
-              placeholder="https://www.baidu.com/s?wd="
-              id="othersValue"
-              style="width: 200px"
-              onclick="turnOther()"
-            />
-          </label>
-        </form>
+      <div
+        style="
+          display: flex;
+          color: gray;
+          margin-top: 30px;
+          justify-content: space-between;
+          width: 525.89px;
+        "
+      >
+        <p1 id="open">今日开机时间：00:00:00</p1>
+        <p1 id="toNow" style="margin-left: 16px">已开机：00:00:00</p1>
       </div>
+      <span
+        onclick="list()"
+        style="margin-top: 10px; color: blue; font-size: small"
+        >开关机记录</span
+      >
+      <audio id="audio" src="./music.m4a" hidden="true"></audio>
     </div>
-    <div
-      style="
-        display: flex;
-        color: gray;
-        margin-top: 30px;
-        justify-content: space-between;
-        width: 525.89px;
-      "
-    >
-      <p1 id="open">今日开机时间：00:00:00</p1>
-      <p1 id="toNow" style="margin-left: 16px">已开机：00:00:00</p1>
-    </div>
-    <audio id="audio" src="./music.m4a" hidden="true"></audio>
   </body>
   <script>
     function cache() {
@@ -133,7 +157,10 @@
     }
     function isEnglish(typeBox) {
       for (let i = 0; i < typeBox.length; i++) {
-        if (!(typeBox[i] >= "a" && typeBox[i] <= "z")) {
+        if (
+          !(typeBox[i] >= "a" && typeBox[i] <= "z") &&
+          !(typeBox[i] >= "A" && typeBox[i] <= "Z")
+        ) {
           return false;
         }
       }
@@ -182,8 +209,11 @@
       radio[9].checked = true;
     }
     window.onkeydown = function (event) {
-      if (event.keyCode === 13) {
+      if (event.keyCode == 13) {
         go();
+      }
+      if (event.keyCode == 83 && openSearch) {
+        search();
       }
     };
     cache();
@@ -220,15 +250,21 @@
       document.getElementById("toNow").innerHTML =
         "已开机：" + getDifference(now, open);
       let clock = new Date((getDayTime() + " " + clockTime).replace(/-/g, "/"));
-      if (getDifference(now, clock) == "00:" + addZero(clockSpan) + ":00") {
+      if (getDifference(now, clock) >= "00:" + addZero(clockSpan) + ":00") {
         clockTime = getSecondTime();
         document.getElementById("audio").play();
       }
+      window.localStorage.setItem(getDayTime(), [
+        " 开机时间: " + window.localStorage.getItem("time") + " ",
+        " 关机时间: " + getSecondTime() + " ",
+        " 使用时长: " + getDifference(now, open),
+      ]);
       setTimeout(() => {
         time();
       }, 1000);
     }
     function addZero(time) {
+      time = Number(time);
       return time < 10 ? "0" + time : time;
     }
     function getDifference(timea, timeb) {
@@ -238,14 +274,73 @@
       let s = parseInt(((times % (3600 * 1000)) % (60 * 1000)) / 1000);
       return addZero(h) + ":" + addZero(m) + ":" + addZero(s);
     }
+    function list() {
+      openSearch = true;
+      let date = document.createElement("div");
+      date.id = "date";
+      date.className = "list";
+      date.style = "margin-top: 10px";
+      let text = document.createElement("div");
+      text.id = "text";
+      text.className = "list";
+      let yesterday = new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
+      let inA = document.createElement("input");
+      inA.id = "inA";
+      inA.style = "width: 30px";
+      inA.value = yesterday.getFullYear();
+      let p1 = document.createElement("p1");
+      p1.style = "margin-left: 8px; font-size: medium;";
+      p1.innerHTML = "年";
+      let inB = document.createElement("input");
+      inB.id = "inB";
+      inB.style = "margin-left: 8px; width: 15px";
+      inB.value = addZero(yesterday.getMonth() + 1);
+      let p2 = document.createElement("p1");
+      p2.style = "margin-left: 8px; font-size: medium;";
+      p2.innerHTML = "月";
+      let inC = document.createElement("input");
+      inC.id = "inC";
+      inC.style = "margin-left: 8px; width: 15px";
+      inC.value = addZero(yesterday.getDate());
+      let p3 = document.createElement("p1");
+      p3.style = "margin-left: 8px; font-size: medium";
+      p3.innerHTML = "日";
+      let ok = document.createElement("p1");
+      ok.innerHTML = "按 S键 查询";
+      ok.style = "font-size: x-small";
+      document.getElementById("body").appendChild(date);
+      document.getElementById("body").appendChild(text);
+      document.getElementById("date").appendChild(inA);
+      document.getElementById("date").appendChild(p1);
+      document.getElementById("date").appendChild(inB);
+      document.getElementById("date").appendChild(p2);
+      document.getElementById("date").appendChild(inC);
+      document.getElementById("date").appendChild(p3);
+      document.getElementById("text").appendChild(ok);
+    }
+    function search() {
+      openSearch = false;
+      let searchDay =
+        document.getElementById("inA").value +
+        "-" +
+        addZero(document.getElementById("inB").value) +
+        "-" +
+        addZero(document.getElementById("inC").value);
+      window.confirm(window.localStorage.getItem(searchDay));
+      document
+        .getElementById("body")
+        .removeChild(document.getElementById("date"));
+      document
+        .getElementById("body")
+        .removeChild(document.getElementById("text"));
+    }
     if (window.localStorage.getItem("day") != getDayTime()) {
-      console.log("new");
       window.localStorage.setItem("day", getDayTime());
       window.localStorage.setItem("time", getSecondTime());
-      clockTime = getSecondTime();
     }
-    let clockTime,
-      clockSpan = 30;
+    let clockTime = getSecondTime(),
+      clockSpan = 30,
+      openSearch = false;
     time();
     document.getElementById("open").innerHTML =
       "今日开机时间：" + window.localStorage.getItem("time");
