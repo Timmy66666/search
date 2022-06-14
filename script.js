@@ -34,41 +34,12 @@ function isEnglish(typeBox) {
 }
 function go() {
   let typeBox = document.getElementById("typeBox").value;
-  let choose = getValue();
   let url;
-  switch (choose) {
-    case "baidu":
-      url = "https://www.baidu.com/s?wd=" + typeBox;
-      break;
-    case "google":
-      url = "https://www.soumao.cc/search?q=" + typeBox;
-      break;
-    case "bing":
-      url = "https://cn.bing.com/search?q=" + typeBox;
-      break;
-    case "360":
-      url = "https://www.so.com/s?q=" + typeBox;
-      break;
-    case "youDao":
-      url = "http://www.youdao.com/w/eng/" + typeBox;
-      break;
-    case "baiDuFanYi":
-      url = "https://fanyi.baidu.com/#en/zh/" + typeBox;
-      break;
-    case "soGou":
-      url = "http://www.sogou.com/web?query=" + typeBox;
-      break;
-    case "biliBili":
-      url = "https://search.bilibili.com/all?keyword=" + typeBox;
-      break;
-    case "baiDuHanYu":
-      url = "https://hanyu.baidu.com/s?wd=" + typeBox;
-      break;
-    default:
-      url = document.getElementById("othersValue").value + typeBox;
-      break;
+  if (getValue() == "others") {
+    window.open(document.getElementById("othersValue").value + typeBox);
+  } else {
+    window.open(getValue() + typeBox);
   }
-  window.open(url);
 }
 function turnOther() {
   radio = document.getElementById("form");
