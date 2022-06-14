@@ -16,6 +16,8 @@
       background-image: url("./bg.jpg");
       color: white;
       font-size: large;
+      font-family: "FangSong";
+      font-weight: bold;
     }
     .list {
       display: flex;
@@ -28,6 +30,9 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+    }
+    .label {
+      margin-top: 10px;
     }
   </style>
   <body>
@@ -55,20 +60,45 @@
                 id="baidu"
                 name="search"
                 value="baidu"
+                class="label"
                 checked
               />
               百度
               <br />
-              <input type="radio" id="google" name="search" value="google" />
+              <input
+                type="radio"
+                id="google"
+                name="search"
+                value="google"
+                class="label"
+              />
               谷歌
               <br />
-              <input type="radio" id="bing" name="search" value="bing" />
+              <input
+                type="radio"
+                id="bing"
+                name="search"
+                value="bing"
+                class="label"
+              />
               必应
               <br />
-              <input type="radio" id="360" name="search" value="360" />
+              <input
+                type="radio"
+                id="360"
+                name="search"
+                value="360"
+                class="label"
+              />
               360
               <br />
-              <input type="radio" id="soGou" name="search" value="soGou" />
+              <input
+                type="radio"
+                id="soGou"
+                name="search"
+                value="soGou"
+                class="label"
+              />
               搜狗
               <br />
               <input
@@ -76,6 +106,7 @@
                 id="biliBili"
                 name="search"
                 value="biliBili"
+                class="label"
               />
               哔哩哔哩
               <br />
@@ -84,10 +115,17 @@
                 id="baiDuHanYu"
                 name="search"
                 value="baiDuHanYu"
+                class="label"
               />
               百度汉语
               <br />
-              <input type="radio" id="youDao" name="search" value="youDao" />
+              <input
+                type="radio"
+                id="youDao"
+                name="search"
+                value="youDao"
+                class="label"
+              />
               有道
               <br />
               <input
@@ -95,16 +133,24 @@
                 id="baiDuFanYi"
                 name="search"
                 value="baiDuFanYi"
+                class="label"
               />
               百度翻译
               <br />
-              <input type="radio" id="others" name="search" value="others" />
+              <input
+                type="radio"
+                id="others"
+                name="search"
+                value="others"
+                class="label"
+              />
               其他（请填写URL及表单关键字）：
               <input
                 type="text"
                 placeholder="https://www.baidu.com/s?wd="
                 id="othersValue"
                 style="width: 200px"
+                class="label"
                 onclick="turnOther()"
               />
             </label>
