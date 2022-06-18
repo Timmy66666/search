@@ -28,8 +28,9 @@ body {
   margin-top: 10px;
 }
 #time {
-  margin-left: 16px;
+  font-size: 100px;
 }
 #typeBox {
+  margin-top: 50px;
   width: 466px;
 }

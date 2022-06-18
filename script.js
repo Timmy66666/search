@@ -76,8 +76,11 @@ function getSecondTime() {
   return secondTime;
 }
 function time() {
+  let week = ["日", "一", "二", "三", "四", "五", "六"];
   document.getElementById("day").innerHTML = getDayTime();
-  document.getElementById("time").innerHTML = getSecondTime();
+  document.getElementById("time").innerHTML = getSecondTime().substring(0, 5);
+  document.getElementById("week").innerHTML =
+    "星期" + week[new Date().getDay()];
   let now = new Date();
   let open =
     window.localStorage.getItem("day") +

@@ -8,11 +8,23 @@
   </head>
   <body>
     <div id="body">
-      <div style="display: flex; color: gray; font-size: larger">
-        <p1 id="day">2000-01-01</p1>
-        <p1 id="time">00:00:00</p1>
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          color: gray;
+          font-size: larger;
+          align-items: center;
+        "
+      >
+        <p1 id="time">00:00</p1>
+        <div
+          style="display: flex; justify-content: space-between; width: 200px"
+        >
+          <p1 id="day">2000-01-01</p1>
+          <p1 id="week">星期一</p1>
+        </div>
       </div>
-      <h1 style="margin-top: 50px">万能搜索引擎</h1>
       <div>
         <div>
           <input type="text" placeholder="搜索内容……" id="typeBox" />
