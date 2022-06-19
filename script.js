@@ -25,7 +25,8 @@ function isEnglish(typeBox) {
   for (let i = 0; i < typeBox.length; i++) {
     if (
       !(typeBox[i] >= "a" && typeBox[i] <= "z") &&
-      !(typeBox[i] >= "A" && typeBox[i] <= "Z")
+      !(typeBox[i] >= "A" && typeBox[i] <= "Z") &&
+      typeBox[i] != " "
     ) {
       return false;
     }
@@ -45,6 +46,14 @@ function turnOther() {
   radio = document.getElementById("form");
   radio[9].checked = true;
 }
+function changebg() {
+  window.localStorage.setItem(
+    "bg",
+    Number(window.localStorage.getItem("bg")) + 1
+  );
+  document.body.style.backgroundImage =
+    "url(./bg/" + (window.localStorage.getItem("bg") % 5) + ".jpg)";
+}
 window.onkeydown = function (event) {
   if (event.keyCode == 13) {
     go();
@@ -53,6 +62,8 @@ window.onkeydown = function (event) {
     search();
   }
 };
+document.body.style.backgroundImage =
+  "url(./bg/" + (window.localStorage.getItem("bg") % 5) + ".jpg)";
 cache();
 function getDayTime() {
   let date = new Date();
@@ -171,6 +182,7 @@ function search() {
   document.getElementById("body").removeChild(document.getElementById("text"));
 }
 if (window.localStorage.getItem("day") != getDayTime()) {
+  window.localStorage.setItem("bg", 0);
   window.localStorage.setItem("day", getDayTime());
   window.localStorage.setItem("time", getSecondTime());
 }
