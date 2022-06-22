@@ -22,6 +22,9 @@ function getValue() {
   }
 }
 function isEnglish(typeBox) {
+  if (typeBox == "") {
+    return false;
+  }
   for (let i = 0; i < typeBox.length; i++) {
     if (
       !(typeBox[i] >= "a" && typeBox[i] <= "z") &&
@@ -35,7 +38,6 @@ function isEnglish(typeBox) {
 }
 function go() {
   let typeBox = document.getElementById("typeBox").value;
-  let url;
   if (getValue() == "others") {
     window.open(document.getElementById("othersValue").value + typeBox);
   } else {
@@ -46,7 +48,7 @@ function turnOther() {
   radio = document.getElementById("form");
   radio[9].checked = true;
 }
-function changebg() {
+function changeBg() {
   window.localStorage.setItem(
     "bg",
     Number(window.localStorage.getItem("bg")) + 1
