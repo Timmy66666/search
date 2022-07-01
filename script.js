@@ -184,9 +184,11 @@ function search() {
   document.getElementById("body").removeChild(document.getElementById("text"));
 }
 if (window.localStorage.getItem("day") != getDayTime()) {
-  window.localStorage.setItem("bg", 0);
   window.localStorage.setItem("day", getDayTime());
   window.localStorage.setItem("time", getSecondTime());
+}
+if (window.localStorage.getItem("bg") == null) {
+  window.localStorage.setItem("bg", 0);
 }
 let clockTime = getSecondTime(),
   clockSpan = 30,
