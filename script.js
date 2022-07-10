@@ -4,6 +4,11 @@ function cache() {
     let after = document.getElementById("typeBox").value;
     if (before != after) {
       radio = document.getElementById("form");
+      if (after == "") {
+        document.getElementById("button").innerHTML = "前往";
+      } else {
+        document.getElementById("button").innerHTML = "搜索";
+      }
       if (isEnglish(after)) {
         radio[7].checked = true;
       } else {
